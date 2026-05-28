@@ -33,13 +33,23 @@ export default function Home() {
       <div className="w-full md:w-[60vw] bg-white p-8 sm:p-12 rounded-lg shadow-sm border border-[#e5e7eb] flex flex-col justify-between my-8">
         
         {/* 상단 타이틀 영역 */}
-        <header className="border-b border-[#eee] pb-6 mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#1a202c]">
-            우리동네 생활정보
-          </h1>
-          <p className="text-sm text-[#718096] mt-1.5 opacity-80">
-            성남시 소식을 투명하게 전해드립니다.
-          </p>
+        <header className="border-b border-[#eee] pb-6 mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#1a202c]">
+              우리동네 생활정보
+            </h1>
+            <p className="text-sm text-[#718096] mt-1.5 opacity-80">
+              성남시 소식을 투명하게 전해드립니다.
+            </p>
+          </div>
+          <div className="self-start sm:self-center">
+            <Link
+              href="/blog/"
+              className="text-xs font-semibold px-4.5 py-2.5 bg-[#f0f4f8] text-[#334488] rounded-lg border border-[#334488]/10 hover:bg-[#e2eaf4] transition-colors"
+            >
+              블로그 보러가기 📝
+            </Link>
+          </div>
         </header>
 
         {/* 메인 콘텐츠 영역 */}
@@ -81,7 +91,7 @@ export default function Home() {
                   <div>
                     {/* 상세 페이지 링크로 변경 */}
                     <Link
-                      href={`/info/${event.id}/`}
+                      href="/blog/"
                       className="text-[#334488] hover:text-[#223366] text-xs font-semibold hover:underline"
                     >
                       상세 정보 확인하기 →
@@ -118,7 +128,7 @@ export default function Home() {
                   <div>
                     {/* 상세 페이지 링크로 변경 */}
                     <Link
-                      href={`/info/${benefit.id}/`}
+                      href="/blog/"
                       className="text-[#334488] hover:text-[#223366] text-xs font-semibold hover:underline"
                     >
                       상세 정보 확인하기 →
