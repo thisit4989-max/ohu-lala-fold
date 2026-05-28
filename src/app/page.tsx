@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import Link from "next/link";
+import AdBanner from "@/components/AdBanner";
 
 interface InfoItem {
   id: string;
@@ -42,7 +43,13 @@ export default function Home() {
               성남시 소식을 투명하게 전해드립니다.
             </p>
           </div>
-          <div className="self-start sm:self-center">
+          <div className="self-start sm:self-center flex items-center gap-3">
+            <Link
+              href="/about/"
+              className="text-xs font-semibold px-4.5 py-2.5 bg-[#f3f4f6] text-[#4b5563] rounded-lg border border-[#e5e7eb] hover:bg-[#e5e7eb] transition-colors"
+            >
+              소개 🏡
+            </Link>
             <Link
               href="/blog/"
               className="text-xs font-semibold px-4.5 py-2.5 bg-[#f0f4f8] text-[#334488] rounded-lg border border-[#334488]/10 hover:bg-[#e2eaf4] transition-colors"
@@ -69,38 +76,62 @@ export default function Home() {
               🎉 이번 달 주요 행사
             </h2>
             <div className="space-y-6">
-              {events.map((event) => (
-                <div key={event.id} className="opacity-90">
-                  <div className="flex items-center space-x-2 text-xs text-[#718096] mb-1">
-                    <span className="font-semibold text-[#334488] bg-[#f0f4f8] px-2 py-0.5 rounded">
-                      {event.category}
-                    </span>
-                    <span>•</span>
-                    <span>{event.startDate} ~ {event.endDate}</span>
+              {events.map((event) => {
+                const eventJsonLd = {
+                  "@context": "https://schema.org",
+                  "@type": "Event",
+                  "name": event.title,
+                  "startDate": event.startDate,
+                  "endDate": event.endDate || event.startDate,
+                  "location": {
+                    "@type": "Place",
+                    "name": event.location,
+                    "address": {
+                      "@type": "PostalAddress",
+                      "addressLocality": "성남시",
+                    },
+                  },
+                  "description": event.description,
+                };
+                return (
+                  <div key={event.id} className="opacity-90">
+                    <script
+                      type="application/ld+json"
+                      dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
+                    />
+                    <div className="flex items-center space-x-2 text-xs text-[#718096] mb-1">
+                      <span className="font-semibold text-[#334488] bg-[#f0f4f8] px-2 py-0.5 rounded">
+                        {event.category}
+                      </span>
+                      <span>•</span>
+                      <span>{event.startDate} ~ {event.endDate}</span>
+                    </div>
+                    <h3 className="text-base font-bold text-[#2d3748] mb-1.5">
+                      {event.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#4a5568] leading-relaxed mb-2 opacity-80">
+                      {event.description}
+                    </p>
+                    <div className="flex space-x-4 text-xs text-[#718096] mb-3">
+                      <span>📍 {event.location}</span>
+                      <span>👥 {event.target}</span>
+                    </div>
+                    <div>
+                      {/* 상세 페이지 링크로 변경 */}
+                      <Link
+                        href="/blog/"
+                        className="text-[#334488] hover:text-[#223366] text-xs font-semibold hover:underline"
+                      >
+                        상세 정보 확인하기 →
+                      </Link>
+                    </div>
                   </div>
-                  <h3 className="text-base font-bold text-[#2d3748] mb-1.5">
-                    {event.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#4a5568] leading-relaxed mb-2 opacity-80">
-                    {event.description}
-                  </p>
-                  <div className="flex space-x-4 text-xs text-[#718096] mb-3">
-                    <span>📍 {event.location}</span>
-                    <span>👥 {event.target}</span>
-                  </div>
-                  <div>
-                    {/* 상세 페이지 링크로 변경 */}
-                    <Link
-                      href="/blog/"
-                      className="text-[#334488] hover:text-[#223366] text-xs font-semibold hover:underline"
-                    >
-                      상세 정보 확인하기 →
-                    </Link>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
+
+          <AdBanner slot="0987654321" />
 
           {/* 혜택 리스트 */}
           <section className="space-y-6">
@@ -108,34 +139,50 @@ export default function Home() {
               💰 지원금 & 혜택 정보
             </h2>
             <div className="space-y-6">
-              {benefits.map((benefit) => (
-                <div key={benefit.id} className="opacity-90">
-                  <div className="flex items-center space-x-2 text-xs text-[#718096] mb-1">
-                    <span className="font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                      {benefit.category}
-                    </span>
+              {benefits.map((benefit) => {
+                const serviceJsonLd = {
+                  "@context": "https://schema.org",
+                  "@type": "GovernmentService",
+                  "name": benefit.title,
+                  "description": benefit.description,
+                  "provider": {
+                    "@type": "GovernmentOrganization",
+                    "name": benefit.location || "지자체",
+                  },
+                };
+                return (
+                  <div key={benefit.id} className="opacity-90">
+                    <script
+                      type="application/ld+json"
+                      dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+                    />
+                    <div className="flex items-center space-x-2 text-xs text-[#718096] mb-1">
+                      <span className="font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                        {benefit.category}
+                      </span>
+                    </div>
+                    <h3 className="text-base font-bold text-[#2d3748] mb-1.5">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#4a5568] leading-relaxed mb-2 opacity-80">
+                      {benefit.description}
+                    </p>
+                    <div className="flex space-x-4 text-xs text-[#718096] mb-3">
+                      <span>👥 대상: {benefit.target}</span>
+                      <span>🏢 신청처: {benefit.location}</span>
+                    </div>
+                    <div>
+                      {/* 상세 페이지 링크로 변경 */}
+                      <Link
+                        href="/blog/"
+                        className="text-[#334488] hover:text-[#223366] text-xs font-semibold hover:underline"
+                      >
+                        상세 정보 확인하기 →
+                      </Link>
+                    </div>
                   </div>
-                  <h3 className="text-base font-bold text-[#2d3748] mb-1.5">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#4a5568] leading-relaxed mb-2 opacity-80">
-                    {benefit.description}
-                  </p>
-                  <div className="flex space-x-4 text-xs text-[#718096] mb-3">
-                    <span>👥 대상: {benefit.target}</span>
-                    <span>🏢 신청처: {benefit.location}</span>
-                  </div>
-                  <div>
-                    {/* 상세 페이지 링크로 변경 */}
-                    <Link
-                      href="/blog/"
-                      className="text-[#334488] hover:text-[#223366] text-xs font-semibold hover:underline"
-                    >
-                      상세 정보 확인하기 →
-                    </Link>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         </main>
