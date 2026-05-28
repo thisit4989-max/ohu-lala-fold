@@ -60,6 +60,9 @@ export default function RootLayout({
   const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_ID;
   const showAdsense = adsenseId && adsenseId !== "나중에_입력" && adsenseId.trim() !== "";
 
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const showGA = gaId && gaId !== "나중에_입력" && gaId.trim() !== "";
+
   return (
     <html
       lang="en"
@@ -72,6 +75,21 @@ export default function RootLayout({
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
             crossOrigin="anonymous"
           />
+        )}
+        {showGA && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}');
+                `,
+              }}
+            />
+          </>
         )}
       </head>
       <body className="min-h-full flex flex-col">
