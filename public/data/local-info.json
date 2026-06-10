@@ -174,5 +174,16 @@
     "target": "산지위판장, 도매시장 법인, 중도매인 등",
     "description": "산지위판장 등을 대상으로 어대금 결제자금, 직거래 자금 등에 대한 융자지원",
     "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000027"
+  },
+  {
+    "id": "17",
+    "title": "수산경영인회생자금",
+    "category": "혜택",
+    "startDate": "2026-06-10",
+    "endDate": "상시",
+    "location": "해양수산부",
+    "target": "어업경영체(어업인, 어업법인 등)",
+    "description": "어려움에 빠진 어업경영체를 대상으로 수산경영회생자금 지원",
+    "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000044"
   }
 ]
