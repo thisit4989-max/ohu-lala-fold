@@ -90,18 +90,11 @@ export default function Chatbot() {
 
       {/* 챗봇 채팅창 */}
       <div
-        className={`fixed md:absolute bottom-24 right-0 w-full md:w-[360px] h-[calc(100vh-120px)] md:h-[500px] max-h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-150 flex flex-col overflow-hidden transition-all duration-300 transform origin-bottom-right ${
+        className={`fixed bottom-24 right-4 md:right-6 w-[calc(100vw-32px)] sm:w-[360px] h-[calc(100vh-120px)] md:h-[500px] max-h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden transition-all duration-300 transform origin-bottom-right ${
           isOpen
             ? "scale-100 opacity-100 translate-y-0"
             : "scale-95 opacity-0 translate-y-4 pointer-events-none"
         }`}
-        style={{
-          // 모바일 환경 대응 (너비와 위치 조정)
-          left: isOpen ? "16px" : "auto",
-          right: isOpen ? "16px" : "auto",
-          width: "calc(100% - 32px)",
-          maxWidth: "360px",
-        }}
       >
         {/* 채팅창 상단 헤더 */}
         <div className="bg-blue-600 text-white px-5 py-4 flex items-center justify-between shadow-sm">
