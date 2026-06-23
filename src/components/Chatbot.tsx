@@ -15,7 +15,7 @@ export default function Chatbot() {
     {
       id: "welcome",
       sender: "bot",
-      text: "안녕하세요! 우리동네 생활정보 AI 상담원입니다. 궁금한 내용을 선택해주세요.",
+      text: "안녕하세요! '동네정보 지킴이'입니다. 우리동네 행사 및 혜택에 대해 궁금한 내용을 선택해주세요.",
     },
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -50,7 +50,7 @@ export default function Chatbot() {
       {/* 챗봇 플로팅 버튼 */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 focus:outline-none"
+        className="w-14 h-14 bg-gradient-to-tr from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 focus:outline-none"
         aria-label="챗봇 상담창 열기"
       >
         {isOpen ? (
@@ -97,17 +97,17 @@ export default function Chatbot() {
         }`}
       >
         {/* 채팅창 상단 헤더 */}
-        <div className="bg-blue-600 text-white px-5 py-4 flex items-center justify-between shadow-sm">
+        <div className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-5 py-4 flex items-center justify-between shadow-sm">
           <div className="flex items-center space-x-3">
             <div className="relative">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-bold text-lg">
-                🤖
+                🏡
               </div>
-              <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-blue-600 rounded-full"></span>
+              <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-emerald-600 rounded-full"></span>
             </div>
             <div>
-              <h3 className="font-bold text-sm">AI 상담원</h3>
-              <p className="text-xs text-blue-100">온라인</p>
+              <h3 className="font-bold text-sm">동네정보 지킴이</h3>
+              <p className="text-xs text-emerald-100">온라인</p>
             </div>
           </div>
           <button
@@ -141,7 +141,7 @@ export default function Chatbot() {
               <div
                 className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm shadow-sm leading-relaxed ${
                   msg.sender === "user"
-                    ? "bg-blue-600 text-white rounded-br-none"
+                    ? "bg-emerald-600 text-white rounded-br-none"
                     : "bg-white text-gray-800 border border-gray-200 rounded-bl-none"
                 }`}
               >
