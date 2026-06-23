@@ -101,11 +101,13 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
-      {/* 챗봇 플로팅 버튼 */}
+    <div className="font-sans">
+      {/* 챗봇 플로팅 버튼 - 모바일에서 채팅창이 열려있을 때는 숨김 */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 bg-gradient-to-tr from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 focus:outline-none"
+        className={`fixed bottom-6 right-6 z-50 w-14 h-14 bg-gradient-to-tr from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 focus:outline-none ${
+          isOpen ? "max-md:hidden" : ""
+        }`}
         aria-label="챗봇 상담창 열기"
       >
         {isOpen ? (
@@ -145,11 +147,16 @@ export default function Chatbot() {
 
       {/* 챗봇 채팅창 */}
       <div
-        className={`fixed bottom-24 right-4 md:right-6 w-[calc(100vw-32px)] sm:w-[360px] h-[calc(100vh-120px)] md:h-[500px] max-h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden transition-all duration-300 transform origin-bottom-right ${
+        className={`fixed z-50 bg-white flex flex-col overflow-hidden transition-all duration-300 transform origin-bottom-right ${
           isOpen
             ? "scale-100 opacity-100 translate-y-0"
             : "scale-95 opacity-0 translate-y-4 pointer-events-none"
-        }`}
+        }
+        /* 모바일에서는 화면 전체를 채움 */
+        inset-0 w-full h-full rounded-none
+        /* 데스크톱(md: 768px 이상)에서만 플로팅 모달 크기 적용 */
+        md:inset-auto md:bottom-24 md:right-6 md:w-[360px] md:h-[500px] md:max-h-[600px] md:rounded-2xl md:shadow-2xl md:border md:border-gray-200
+        `}
       >
         {/* 채팅창 상단 헤더 */}
         <div className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-5 py-4 flex items-center justify-between shadow-sm">
